@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CARBONE | Premium Devices. Smarter Choice.</title>
+    <style>
+        :root {
+            --bg-color: #f4f8fc;
+            --accent-blue: #2563eb;
+            --accent-blue-light: #eff6ff;
+            --accent-purple: #7c3aed;
+            --accent-green: #059669;
+            --glass-bg: rgba(255, 255, 255, 0.85);
+            --glass-border: rgba(219, 234, 254, 0.8);
+            --glass-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            padding-bottom: 60px;
+            -webkit-font-smoothing: antialiased;
+        }
+        body.rtl { direction: rtl; }
+        
+        /* Header */
+        header {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 18px 6%; position: sticky; top: 0; z-index: 100;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid var(--glass-border); gap: 20px;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.05);
+        }
+        .logo-img { width: 5cm; height: 2cm; object-fit: contain; flex-shrink: 0; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.05)); }
+        .header-actions { display: flex; align-items: center; gap: 12px; flex-wrap: nowrap; }
+        
+        .location-select-box {
+            display: flex; align-items: center; gap: 6px;
+            background: #eff6ff; border: 1px solid #bfdbfe;
+            backdrop-filter: blur(12px); padding: 6px 12px; border-radius: 14px; flex-shrink: 0; white-space: nowrap;
+        }
+        .branch-select {
+            background: transparent; border: none; color: var(--accent-blue);
+            font-size: 0.85rem; font-weight: 600; cursor: pointer; outline: none;
+        }
+        .branch-select option { background: #ffffff; color: var(--text-primary); }
+        
+        .btn-add-stock {
+            background: #ecfdf5; border: 1px solid #a7f3d0; backdrop-filter: blur(12px);
+            color: var(--accent-green); padding: 8px 16px; border-radius: 14px;
+            font-size: 0.85rem; font-weight: 600; cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(5, 150, 105, 0.1);
+        }
+        .btn-add-stock:hover {
+            background: var(--accent-green); border-color: var(--accent-green);
+            color: #ffffff; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(5, 150, 105, 0.25);
+        }
+        .lang-badge {
+            position: relative; display: inline-flex; align-items: center; justify-content: center;
+            padding: 6px 14px; border-radius: 20px; background: #eff6ff; border: 1px solid #bfdbfe;
+            backdrop-filter: blur(12px); overflow: hidden; flex-shrink: 0; width: 170px; height: 34px;
+        }
+        .lang-badge::after {
+            content: ''; position: absolute; top: -50%; left: -150%; width: 100%; height: 200%;
+            background: linear-gradient(60deg, transparent 30%, rgba(37, 99, 235, 0.15) 50%, transparent 70%);
+            transform: rotate(25deg); animation: shine 2.5s infinite ease-in-out;
+        }
+        @keyframes shine { 0% { left: -150%; } 100% { left: 150%; } }
+        .lang-label-ticker {
+            font-size: 0.82rem; font-weight: 600; color: var(--accent-blue);
+            transition: opacity 0.3s ease; white-space: nowrap; letter-spacing: 0.3px; text-align: center; width: 100%;
+        }
+        .lang-select {
+            background: #ffffff; border: 1px solid #bfdbfe; backdrop-filter: blur(12px);
+            color: var(--text-primary); padding: 8px 14px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; outline: none; flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+        }
+
+        /* Banner Showcase */
+        .showcase-banner {
+            position: relative; width: 100%; min-height: 520px;
+            background-image: url('images/hero-devices.png'); background-size: cover;
+            background-position: center right; background-repeat: no-repeat;
+            display: flex; align-items: center; padding: 40px 6%; margin-top: 0;
+        }
+        .hero-text-content { position: relative; z-index: 2; max-width: 500px; }
+        .hero-title {
+            font-size: 3rem; font-weight: 800; line-height: 1.1; margin-bottom: 14px;
+            background: linear-gradient(110deg, #1e40af 0%, #2563eb 25%, #60a5fa 45%, #ffffff 50%, #60a5fa 55%, #2563eb 75%, #1e40af 100%);
+            background-size: 200% auto; color: transparent; -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+            animation: shineText 4s linear infinite;
+        }
+        @keyframes shineText { to { background-position: 200% center; } }
+        .hero-subtitle { font-size: 1.05rem; color: #475569; line-height: 1.5; margin-bottom: 24px; }
+        .badges-group { display: flex; gap: 16px; flex-wrap: wrap; }
+        .badge-card {
+            display: flex; align-items: center; gap: 10px; background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px); border: 1px solid #dbeafe; padding: 10px 16px; border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.08);
+        }
+        .badge-text { font-size: 0.85rem; font-weight: 700; color: var(--text-primary); }
+        .badge-subtext { font-size: 0.75rem; color: var(--text-secondary); }
+
+        /* Catalog Layout */
+        .catalog-box {
+            max-width: 1300px; margin: 30px auto 0 auto; padding: 30px;
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(16px);
+            border: 1px solid var(--glass-border); border-radius: 28px; box-shadow: var(--glass-shadow);
+        }
+        .filter-row { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; margin-bottom: 25px; width: 100%; }
+        .filter-label { font-size: 0.85rem; color: var(--text-secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; }
+        .filter-options { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; width: 100%; }
+        .pill-btn {
+            background: #ffffff; border: 1px solid #cbd5e1; color: var(--text-secondary);
+            padding: 10px 22px; border-radius: 16px; font-size: 0.88rem; font-weight: 600; cursor: pointer;
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+        }
+        .pill-btn:hover { color: var(--accent-blue); background: #f8fafc; border-color: #93c5fd; transform: translateY(-2px); }
+        .pill-btn.active { background: var(--accent-blue); border-color: var(--accent-blue); color: #ffffff; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3); }
+        .pill-btn.active-purple { background: var(--accent-purple); border-color: var(--accent-purple); color: #ffffff; box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3); }
+
+        /* Grid Cards */
+        #product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; margin-top: 20px; }
+        .card {
+            background: #ffffff; backdrop-filter: blur(16px); border: 1px solid #e2e8f0; border-radius: 22px;
+            padding: 20px; display: flex; flex-direction: column; justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+        .card:hover { transform: translateY(-6px); border-color: #bfdbfe; box-shadow: 0 12px 30px rgba(37, 99, 235, 0.12); }
+        .card-img-box {
+            width: 100%; height: 180px; background: #f8fafc; border-radius: 16px; margin-bottom: 16px;
+            display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid #f1f5f9;
+        }
+        .card-img-box img { max-width: 80%; max-height: 80%; object-fit: contain; }
+        .card-tag { font-size: 0.7rem; color: var(--accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+        .card h3 { font-size: 0.95rem; font-weight: 600; line-height: 1.3; margin-bottom: 12px; color: var(--text-primary); }
+        .card-meta { display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 15px; }
+        .battery-val { color: var(--accent-green); font-weight: 700; display: block; margin-top: 2px; }
+        .branch-badge { background: #eff6ff; border: 1px solid #bfdbfe; color: var(--accent-blue); padding: 3px 8px; border-radius: 8px; font-size: 0.7rem; font-weight: 600; }
+        .card-bottom { display: flex; align-items: center; justify-content: space-between; padding-top: 12px; border-top: 1px solid #f1f5f9; gap: 8px; }
+        .card-price { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
+        .sn-container { display: inline-flex; align-items: center; gap: 6px; background: #f8fafc; border: 1px solid #e2e8f0; padding: 4px 8px; border-radius: 8px; }
+        .sn-tag { font-size: 0.75rem; font-family: monospace; color: var(--text-secondary); }
+        .toggle-sn-btn { background: transparent; border: none; color: var(--text-secondary); cursor: pointer; }
+        .btn-available { background: #ecfdf5; border: 1px solid #a7f3d0; color: var(--accent-green); padding: 6px 12px; border-radius: 10px; font-size: 0.75rem; font-weight: 700; cursor: pointer; }
+
+        /* Modal Styles */
+        .auth-modal { display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); z-index: 9999; align-items: center; justify-content: center; }
+        .auth-modal.show { display: flex; }
+        .auth-box { background: #ffffff; border: 1px solid var(--glass-border); border-radius: 24px; padding: 28px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 20px 50px rgba(37, 99, 235, 0.15); max-height: 90vh; overflow-y: auto; }
+        .auth-box h3 { margin-bottom: 8px; font-size: 1.1rem; color: var(--text-primary); }
+        .auth-box p { font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 16px; }
+        .auth-input, .stock-input, .stock-select { width: 100%; padding: 10px 14px; background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 10px; color: var(--text-primary); outline: none; margin-bottom: 10px; font-size: 0.85rem; }
+        .auth-input:focus, .stock-input:focus, .stock-select:focus { border-color: var(--accent-blue); background: #ffffff; }
+        
+        .autofill-preview {
+            background: #f1f5f9; border: 1px dashed #cbd5e1; padding: 10px; border-radius: 12px; margin-bottom: 12px; font-size: 0.78rem; text-align: left; color: #475569;
+        }
+        .autofill-preview span { font-weight: 700; color: var(--text-primary); }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; text-align: left; }
+        .form-grid label { font-size: 0.75rem; color: var(--text-secondary); font-weight: 600; grid-column: span 2; margin-top: 4px; }
+        .form-grid .half-width { grid-column: span 1; }
+        .form-grid .full-width { grid-column: span 2; }
+        .auth-actions { display: flex; gap: 10px; margin-top: 14px; }
+        .auth-btn { flex: 1; padding: 10px; border: 1px solid transparent; border-radius: 12px; font-weight: 600; cursor: pointer; }
+        .btn-submit { background: var(--accent-blue); border-color: var(--accent-blue); color: #fff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25); }
+        .btn-cancel { background: #f1f5f9; border-color: #cbd5e1; color: var(--text-secondary); }
+        .auth-error { color: #ef4444; font-size: 0.75rem; margin-top: 8px; display: none; }
+        
+        footer { max-width: 1300px; margin: 40px auto 0 auto; padding: 20px 6%; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #e2e8f0; font-size: 0.85rem; color: var(--text-secondary); }
+        footer a { color: var(--text-secondary); text-decoration: none; }
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(12px); z-index: 1000; align-items: center; justify-content: center; }
+        .modal.show { display: flex; }
+        .modal-body { background: #ffffff; border: 1px solid var(--glass-border); padding: 25px; border-radius: 24px; max-width: 90vw; max-height: 85vh; text-align: center; position: relative; }
+        .modal-body img { max-width: 80vw; max-height: 65vh; object-fit: contain; }
+        .close-modal { position: absolute; top: 12px; right: 18px; color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; }
+
+        @media (max-width: 900px) { .showcase-banner { min-height: auto; padding: 50px 6%; background-position: center; } .hero-title { font-size: 2.2rem; } }
+        @media (max-width: 768px) { header { flex-direction: column; align-items: flex-start; } .header-actions { width: 100%; justify-content: space-between; flex-wrap: wrap; } .lang-badge { display: none; } }
+    #screensaverOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  z-index: 999999; /* Higher than all modals and content */
+  cursor: pointer;
+  overflow: hidden;
+}
+
+#screensaverVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Fits full screen without stretching */
+}
+
+.touch-prompt {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 12px 24px;
+  border-radius: 30px;
+  pointer-events: none;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.4; }
+  50% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+    </style>
+</head>
+<body>
+<div id="screensaverOverlay" onclick="dismissScreensaver()">
+  <video id="screensaverVideo" autoplay loop muted playsinline preload="auto">
+    <source src="images/promo.mp4" type="video/mp4">
+  </video>
+ 
+  <div class="touch-prompt">Tap screen to access stock catalog</div>
+</div>
+<header>
+    <div class="logo-group">
+        <img src="images/logo.png" alt="Logo" class="logo-img" onerror="this.src='https://via.placeholder.com/150x58/ffffff/2563eb?text=CARBONE'">
+    </div>
+    <div class="header-actions">
+        <button class="btn-add-stock" onclick="openAddStockModal()">➕ Add Stock</button>
+        <div class="location-select-box">
+            <span>📍</span>
+            <select class="branch-select" id="branchSelect" onchange="changeBranch(this.value)">
+                <option value="all">All Locations</option>
+            </select>
+        </div>
+        <div class="lang-badge">
+            <span class="lang-label-ticker" id="langTicker">Select your language</span>
+        </div>
+        <select class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="en" selected>🇬🇧 EN</option>
+            <option value="fr">🇫🇷 FR</option>
+            <option value="ar">🇦🇪 AR</option>
+            <option value="es">🇪🇸 ES</option>
+            <option value="ru">🇷🇺 RU</option>
+            <option value="zh">🇨🇳 ZH</option>
+        </select>
+    </div>
+</header>
+
+<div class="showcase-banner">
+    <div class="hero-text-content">
+        <h1 class="hero-title" id="hero-title">Premium Devices.<br>Smarter Choice.</h1>
+        <p class="hero-subtitle" id="hero-subtitle">
+            Carefully selected used devices, fully tested and certified by experts. Quality you can trust, price you'll love.
+        </p>
+        <div class="badges-group">
+            <div class="badge-card">
+                <span style="font-size: 1.4rem;">📜</span>
+                <div>
+                    <div class="badge-text" id="badge-tested">Tested & Certified by Experts</div>
+                </div>
+            </div>
+            <div class="badge-card">
+                <span style="font-size: 1.4rem;">🏬</span>
+                <div>
+                    <div class="badge-subtext">By Virgin Megastore</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="catalog-box">
+    <div class="filter-row">
+        <span class="filter-label" id="lbl-cat">Category</span>
+        <div class="filter-options" id="category-group">
+            <button class="pill-btn active" id="btn-cat-iphone" onclick="setCategory('iphone', this)">📱 iPhone</button>
+            <button class="pill-btn" id="btn-cat-ipad" onclick="setCategory('ipad', this)">💻 iPad</button>
+            <button class="pill-btn" id="btn-cat-laptop" onclick="setCategory('laptop', this)">💻 MacBook</button>
+            <button class="pill-btn" id="btn-cat-watch" onclick="setCategory('watch', this)">⌚ Apple Watch</button>
+        </div>
+    </div>
+    <div class="filter-row" id="series-section" style="display: none;">
+        <span class="filter-label" id="lbl-series">Series</span>
+        <div class="filter-options" id="series-group"></div>
+    </div>
+    <div id="product-grid">
+        <div style="color:var(--text-secondary); text-align:center; grid-column: 1/-1; padding: 40px;" id="t-loading">Loading catalog...</div>
+    </div>
+</div>
+
+<footer>
+    <div id="f-rights">© CARBONE. All rights reserved.</div>
+    <div class="footer-links">
+        <a href="#" id="f-terms">Terms & Support</a>
+        <a href="#" id="f-privacy">Privacy Policy</a>
+    </div>
+</footer>
+
+<div class="modal" id="imageModal" onclick="closeModal()">
+    <div class="modal-body" onclick="event.stopPropagation()">
+        <span class="close-modal" onclick="closeModal()">✕</span>
+        <img src="" id="modalImg" alt="Device preview">
+        <div id="modalCap" style="color:var(--text-primary); margin-top:10px; font-weight:600;"></div>
+    </div>
+</div>
+
+<div class="auth-modal" id="passModal">
+    <div class="auth-box">
+        <h3 id="modalTitle">Enter Password</h3>
+        <p id="modalDesc">Enter password to proceed.</p>
+        
+        <div id="passOnlySection">
+            <input type="password" id="passInput" class="auth-input" placeholder="Password" onkeydown="if(event.key==='Enter') verifyPassword()">
+        </div>
+
+        <div id="addStockForm" style="display: none;" class="form-grid">
+            <label>Device SKU (Matches Existing Item)</label>
+            <input type="text" id="newSKU" class="stock-input full-width" placeholder="e.g. Type SKU or Device Name" oninput="autoLookupSKU()">
+            
+            <div class="autofill-preview full-width" id="autofillBox">
+                Auto-Matched Device: <span id="autoMatchedName">None (Type SKU to match)</span>
+            </div>
+
+            <label>Serial Number / IMEI</label>
+            <input type="text" id="newSN" class="stock-input full-width" placeholder="Serial Number / IMEI">
+            
+            <label>Price (AED) & Battery Health</label>
+            <input type="number" id="newPrice" class="stock-input half-width" placeholder="Price">
+            <input type="text" id="newBattery" class="stock-input half-width" placeholder="e.g. 95% or 100%">
+            
+            <label>Target Feuille / Branch Location</label>
+            <select id="newBranch" class="stock-select full-width">
+                <!-- Populated dynamically -->
+            </select>
+
+            <label>Admin Password</label>
+            <input type="password" id="stockPassInput" class="stock-input full-width" placeholder="Password">
+        </div>
+
+        <div class="auth-actions">
+            <button class="auth-btn btn-cancel" onclick="closePassModal()">Cancel</button>
+            <button class="auth-btn btn-submit" id="modalConfirmBtn" onclick="verifyPassword()">Confirm</button>
+        </div>
+        <div id="passError" class="auth-error">Incorrect password or invalid SKU details. Please check again.</div>
+    </div>
+</div>
+
+<script>
+// Updated Google Apps Script Web App URL
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyNrcrSmHd_KyhhDPoY7R8d9ac670jBOcN9fOEsO1ilcRzJo09lImXdrZpHaYFV_F2Z/exec"; 
+const ADMIN_PASSWORD = "1234"; // Synchronized with Apps Script
+
+let authAction = "";
+let activeSNContainer = null;
+let activeRealSN = "";
+let activeItemSerial = "";
+let activeItemBranch = "";
+let activeItemSKU = "";
+let hideTimers = {}; 
+let autoMatchedData = null;
+let rawFullData = [];
+
+const predefinedLocations = [
+    "Dubai Mall",
+    "MOE",
+    "MCC",
+    "Marina Mall",
+    "Zahia Mall",
+    "Yas Mall",
+    "The Galleria Al Maryah",
+    "Dubai hills"
+];
+
+const i18n = {
+    en: { heroTitle: "Premium Devices.<br>Smarter Choice.", heroSubtitle: "Carefully selected used devices, fully tested and certified by experts. Quality you can trust, price you'll love.", tested: "Tested & Certified by Experts", catIphone: "📱 iPhone", catIpad: "💻 iPad", catLaptop: "💻 MacBook", catWatch: "⌚ Apple Watch", lblCat: "Category", lblSeries: "Series", battery: "Battery Health", loading: "Loading catalog...", empty: "No devices found.", fRights: "© CARBONE. All rights reserved.", fTerms: "Terms & Support", fPrivacy: "Privacy Policy" },
+    fr: { heroTitle: "Appareils Premium.<br>Choix Plus Intelligent.", heroSubtitle: "Appareils d'occasion soigneusement sélectionnés, entièrement testés et certifiés par des experts.", tested: "Testé et certifié par des experts", catIphone: "📱 iPhone", catIpad: "💻 iPad", catLaptop: "💻 MacBook", catWatch: "⌚ Apple Watch", lblCat: "Catégorie", lblSeries: "Série", battery: "Santé de la Batterie", loading: "Chargement du catalogue...", empty: "Aucun appareil trouvé.", fRights: "© CARBONE. Tous droits réservés.", fTerms: "Conditions & Support", fPrivacy: "Politique de Confidentialité" },
+    ar: { heroTitle: "أجهزة ممتازة.<br>خيار أذكى.", heroSubtitle: "أجهزة مستعملة مختارة بعناية ومفحوصة ومضمونة من قبل خبراء.", tested: "مفحوصة ومعتمدة من خبراء", catIphone: "📱 آيفون", catIpad: "💻 آيباد", catLaptop: "💻 ماك بوك", catWatch: "⌚ ساعة آبل", lblCat: "الفئة", lblSeries: "السلسلة", battery: "صحة البطارية", loading: "جاري تحميل الكتالوج...", empty: "لم يتم العثور على أجهزة." },
+    es: { heroTitle: "Dispositivos Premium.<br>La Elección Inteligente.", heroSubtitle: "Dispositivos usados seleccionados cuidadosamente, probados y certificados por expertos.", tested: "Probado y certificado por expertos", catIphone: "📱 iPhone", catIpad: "💻 iPad", catLaptop: "💻 MacBook", catWatch: "⌚ Apple Watch", lblCat: "Categoría", lblSeries: "Serie", battery: "Salud de la Batería", loading: "Cargando catálogo...", empty: "No se encontraron dispositivos." },
+    ru: { heroTitle: "Премиум Устройства.<br>Умный Выбор.", heroSubtitle: "Тщательно отобранные б/у устройства, полностью проверенные экспертами.", tested: "Проверено и сертифицировано", catIphone: "📱 iPhone", catIpad: "💻 iPad", catLaptop: "💻 MacBook", catWatch: "⌚ Серия", lblCat: "Категория", lblSeries: "Серия", battery: "Состояние аккумулятора", loading: "Загрузка каталога...", empty: "Устройства не найдены." },
+    zh: { heroTitle: "高端设备。<br>明智之选。", heroSubtitle: "精选二手设备，经过专家完整检测与认证。", tested: "专家检测与认证", catIphone: "📱 iPhone", catIpad: "💻 iPad", catLaptop: "💻 MacBook", catWatch: "⌚ Apple Watch", lblCat: "分类", lblSeries: "系列", battery: "电池健康度", loading: "正在加载目录...", empty: "未找到相关设备。" }
+};
+
+const selectLangPhrases = ["Select your language", "Choisissez votre langue", "اختر لغتك", "Selecciona tu idioma", "Выберите ваш язык", "选择您的语言"];
+let tickerIndex = 0;
+
+function startLangTicker() {
+    const tickerEl = document.getElementById('langTicker');
+    if (!tickerEl) return;
+    setInterval(() => {
+        tickerEl.style.opacity = '0';
+        setTimeout(() => {
+            tickerIndex = (tickerIndex + 1) % selectLangPhrases.length;
+            tickerEl.innerText = selectLangPhrases[tickerIndex];
+            tickerEl.style.opacity = '1';
+        }, 300);
+    }, 2000);
+}
+
+let currentLang = "en";
+let inventory = [];
+let selectedCategory = "iphone";
+let selectedSeries = "";
+let selectedBranch = "Dubai Mall";
+
+function formatBattery(val) {
+    if (val === null || val === undefined || val === "") return "N/A";
+    let num = parseFloat(val);
+    if (isNaN(num)) return val;
+    if (num > 0 && num <= 1) { num = Math.round(num * 100); }
+    return num + "%";
+}
+
+function getItemStatus(item) {
+    const raw = item["status"] || item["Status"] || item["STATUS"] || "";
+    return String(raw).trim().toLowerCase();
+}
+
+function init() {
+    startLangTicker();
+    fetch(APPS_SCRIPT_URL + "?v=" + Date.now())
+        .then(res => res.json())
+        .then(data => {
+            rawFullData = data;
+            inventory = data.filter(item => getItemStatus(item) === "available");
+            populateBranches();
+            updateUI();
+        })
+        .catch(err => {
+            document.getElementById("product-grid").innerHTML = `<div style="color:var(--text-secondary); text-align:center; grid-column: 1/-1; padding: 40px;">Error loading products.</div>`;
+        });
+}
+init();
+
+function populateBranches() {
+    const branchSelect = document.getElementById("branchSelect");
+    const stockBranchSelect = document.getElementById("newBranch");
+    
+    const branchSet = new Set(predefinedLocations);
+    inventory.forEach(item => {
+        const branch = item["branch"] || item["location"] || item["store"] || "";
+        if (branch) branchSet.add(branch.toString().trim());
+    });
+    
+    const allBranches = Array.from(branchSet);
+    if (branchSelect) {
+        branchSelect.innerHTML = allBranches.map(b => `<option value="${b}">${b}</option>`).join('');
+        if (!allBranches.includes(selectedBranch)) selectedBranch = allBranches[0];
+        branchSelect.value = selectedBranch;
+    }
+    if (stockBranchSelect) {
+        stockBranchSelect.innerHTML = allBranches.map(b => `<option value="${b}">${b}</option>`).join('');
+    }
+}
+
+function changeBranch(branch) {
+    selectedBranch = branch;
+    updateUI();
+}
+
+function changeLanguage(lang) {
+    currentLang = lang;
+    const dict = i18n[lang] || i18n['en'];
+    if (lang === 'ar') document.body.classList.add('rtl');
+    else document.body.classList.remove('rtl');
+    
+    if (document.getElementById('hero-title')) document.getElementById('hero-title').innerHTML = dict.heroTitle;
+    if (document.getElementById('hero-subtitle')) document.getElementById('hero-subtitle').innerText = dict.heroSubtitle;
+    if (document.getElementById('badge-tested') && dict.tested) document.getElementById('badge-tested').innerText = dict.tested;
+    if (document.getElementById('btn-cat-iphone')) document.getElementById('btn-cat-iphone').innerText = dict.catIphone;
+    if (document.getElementById('btn-cat-ipad')) document.getElementById('btn-cat-ipad').innerText = dict.catIpad;
+    if (document.getElementById('btn-cat-laptop')) document.getElementById('btn-cat-laptop').innerText = dict.catLaptop;
+    if (document.getElementById('btn-cat-watch')) document.getElementById('btn-cat-watch').innerText = dict.catWatch;
+    if (document.getElementById('lbl-cat')) document.getElementById('lbl-cat').innerText = dict.lblCat;
+    if (document.getElementById('lbl-series')) document.getElementById('lbl-series').innerText = dict.lblSeries;
+    if (document.getElementById('f-rights')) document.getElementById('f-rights').innerText = dict.fRights;
+    if (document.getElementById('f-terms')) document.getElementById('f-terms').innerText = dict.fTerms;
+    if (document.getElementById('f-privacy')) document.getElementById('f-privacy').innerText = dict.fPrivacy;
+    populateBranches();
+    updateUI();
+}
+
+function setCategory(category, btn) {
+    selectedCategory = category;
+    document.querySelectorAll('#category-group .pill-btn').forEach(b => b.classList.remove('active'));
+    let btnMap = { 'iphone': 'btn-cat-iphone', 'ipad': 'btn-cat-ipad', 'laptop': 'btn-cat-laptop', 'watch': 'btn-cat-watch' };
+    let targetBtn = btn || document.getElementById(btnMap[category]);
+    if (targetBtn) targetBtn.classList.add('active');
+    selectedSeries = "";
+    updateUI();
+}
+
+function setSeries(series, btn) {
+    selectedSeries = series;
+    if (btn) {
+        document.querySelectorAll('#series-group .pill-btn').forEach(b => b.classList.remove('active-purple'));
+        btn.classList.add('active-purple');
+    }
+    renderGrid();
+}
+
+function updateUI() {
+    updateSeriesFilters();
+    renderGrid();
+}
+
+function getFilteredInventory() {
+    return inventory.filter(p => {
+        if (getItemStatus(p) !== "available") return false;
+
+        const rawBranch = p["branch"] || p["location"] || p["store"] || "";
+        if (rawBranch) {
+            const itemBranch = rawBranch.toString().trim().toLowerCase();
+            const targetBranch = selectedBranch.toString().trim().toLowerCase();
+            if (itemBranch !== targetBranch) return false;
+        }
+
+        const cat = (p["category"] || p["Category"] || "").toString().trim().toLowerCase();
+        const target = selectedCategory.toString().trim().toLowerCase();
+
+        if (target === "iphone") {
+            return cat === "iphone" || cat === "phone" || cat === "mobile";
+        }
+        if (target === "laptop" || target === "macbook") {
+            return cat === "laptop" || cat === "macbook" || cat === "mac";
+        }
+        
+        return cat === target;
+    });
+}
+
+function updateSeriesFilters() {
+    const seriesSection = document.getElementById("series-section");
+    const seriesGroup = document.getElementById("series-group");
+    if (!seriesSection || !seriesGroup) return;
+
+    let catItems = getFilteredInventory();
+    const seriesSet = new Set();
+    catItems.forEach(p => { if (p["series"]) seriesSet.add(p["series"]); });
+    const seriesList = Array.from(seriesSet);
+    if (seriesList.length === 0) {
+        seriesSection.style.display = "none";
+        selectedSeries = "";
+        return;
+    }
+    seriesSection.style.display = "flex";
+    if (!selectedSeries || !seriesList.includes(selectedSeries)) {
+        selectedSeries = seriesList[0];
+    }
+    seriesGroup.innerHTML = seriesList.map(s => {
+        const active = selectedSeries.toLowerCase() === s.toLowerCase() ? 'active-purple' : '';
+        return `<button class="pill-btn ${active}" onclick="setSeries('${s}', this)">${s}</button>`;
+    }).join('');
+}
+
+function renderGrid() {
+    const grid = document.getElementById("product-grid");
+    if (!grid) return;
+    const dict = i18n[currentLang] || i18n['en'];
+    let items = getFilteredInventory();
+    if (selectedSeries) {
+        items = items.filter(p => (p["series"] || "").toLowerCase() === selectedSeries.toLowerCase());
+    }
+    if (items.length === 0) {
+        grid.innerHTML = `<div style="color:var(--text-secondary); text-align:center; grid-column: 1/-1; padding: 40px;">${dict.empty}</div>`;
+        return;
+    }
+    grid.innerHTML = items.map((p, idx) => {
+        const name = p["product name"] || p["Product Name"] || "Apple Device";
+        const series = p["series"] || "";
+        const rawBattery = p["battery health"] || p["battery"] || "";
+        const battery = formatBattery(rawBattery);
+        const branch = p["branch"] || p["location"] || p["store"] || "";
+        const price = p["price"] ? `${p["price"]} AED` : "Inquire";
+        const sn = p["serial number"] || p["sn"] || p["serial"] || p["imei"] || "N/A";
+        const sku = p["sku"] || "";
+        
+        let imageUrl = p["images"] || p["image"] || p["image url"] || "";
+        if (imageUrl && !imageUrl.startsWith('http') && !imageUrl.startsWith('images/')) {
+            imageUrl = 'images/' + imageUrl;
+        }
+        const safeName = name.replace(/'/g, "\\'");
+        const safeImage = imageUrl.replace(/'/g, "\\'");
+        return `
+            <div class="card" id="card-${idx}">
+                <div>
+                    <div class="card-img-box" onclick="openModal('${safeImage}', '${safeName}')">
+                        <img src="${imageUrl}" alt="${name}" onerror="this.src='https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-finish-select-202309-6-1inch-blue?wid=512&hei=512&fmt=png-alpha'">
+                    </div>
+                    <div class="card-tag">${series}</div>
+                    <h3>${name}</h3>
+                    <div class="card-meta">
+                        <div>
+                            ${dict.battery}
+                            <span class="battery-val">${battery}</span>
+                        </div>
+                        ${branch ? `<span class="branch-badge">📍 ${branch}</span>` : ''}
+                    </div>
+                </div>
+                <div class="card-bottom">
+                    <span class="card-price">${price}</span>
+                    <div class="sn-container" id="sn-box-${idx}">
+                        <span class="sn-tag">SN: ***</span>
+                        <button class="toggle-sn-btn" onclick="handleSNToggle('sn-box-${idx}', '${sn}')" title="Toggle Serial Number">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                        </button>
+                    </div>
+                    <button class="btn-available" onclick="handleMarkSold('${sn}', '${sku}', '${branch}', '${idx}')">Available</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function autoLookupSKU() {
+    const inputVal = document.getElementById('newSKU').value.trim().toLowerCase();
+    const autoBox = document.getElementById('autoMatchedName');
+    autoMatchedData = null;
+    if (!inputVal) {
+        autoBox.innerText = "None (Type SKU to match)";
+        return;
+    }
+    const match = rawFullData.find(p => {
+        const sku = String(p["sku"] || "").toLowerCase();
+        const name = String(p["product name"] || "").toLowerCase();
+        return (sku && sku === inputVal) || (name && name.includes(inputVal));
+    });
+    if (match) {
+        autoMatchedData = match;
+        autoBox.innerText = `${match["product name"] || "Device Found"} (${match["series"] || "Series"})`;
+    } else {
+        autoBox.innerText = "No matching SKU found in database";
+    }
+}
+
+function handleSNToggle(containerId, realSN) {
+    const container = document.getElementById(containerId);
+    const snText = container.querySelector('.sn-tag');
+    if (snText.innerText.includes(realSN)) {
+        snText.innerText = "SN: ***";
+        if (hideTimers[containerId]) clearTimeout(hideTimers[containerId]);
+        return;
+    }
+    authAction = "sn";
+    activeSNContainer = containerId;
+    activeRealSN = realSN;
+    document.getElementById('modalTitle').innerText = "Enter Password";
+    document.getElementById('modalDesc').innerText = "Enter password to reveal serial number.";
+    document.getElementById('passOnlySection').style.display = 'block';
+    document.getElementById('addStockForm').style.display = 'none';
+    openPassModal();
+}
+
+function handleMarkSold(serialNumber, sku, branch, cardIdx) {
+    authAction = "sold";
+    activeItemSerial = serialNumber;
+    activeItemSKU = sku;
+    activeItemBranch = branch || selectedBranch;
+    activeSNContainer = `card-${cardIdx}`;
+    document.getElementById('modalTitle').innerText = "Confirm Sale";
+    document.getElementById('modalDesc').innerText = "Enter password to mark this item as SOLD.";
+    document.getElementById('passOnlySection').style.display = 'block';
+    document.getElementById('addStockForm').style.display = 'none';
+    openPassModal();
+}
+
+function openAddStockModal() {
+    authAction = "add_stock";
+    document.getElementById('modalTitle').innerText = "Add New Stock";
+    document.getElementById('modalDesc').innerText = "Enter SKU to auto-fill details, then set serial and price.";
+    document.getElementById('passOnlySection').style.display = 'none';
+    document.getElementById('addStockForm').style.display = 'grid';
+    openPassModal();
+}
+
+function openPassModal() {
+    document.getElementById('passInput').value = '';
+    document.getElementById('stockPassInput').value = '';
+    document.getElementById('passError').style.display = 'none';
+    document.getElementById('passModal').classList.add('show');
+}
+
+function verifyPassword() {
+    let input = (authAction === "add_stock") ? document.getElementById('stockPassInput').value : document.getElementById('passInput').value;
+    
+    if (input === ADMIN_PASSWORD) {
+        if (authAction === "add_stock") {
+            if (!autoMatchedData) {
+                document.getElementById('passError').innerText = "Please enter a valid matching SKU or Product Name.";
+                document.getElementById('passError').style.display = 'block';
+                return;
+            }
+            const newItem = {
+                "sku": document.getElementById('newSKU').value,
+                "category": autoMatchedData["category"] || "iphone",
+                "series": autoMatchedData["series"] || "",
+                "product name": autoMatchedData["product name"] || "",
+                "images": autoMatchedData["images"] || autoMatchedData["image"] || "",
+                "serial number": document.getElementById('newSN').value,
+                "price": document.getElementById('newPrice').value,
+                "battery health": document.getElementById('newBattery').value,
+                "branch": document.getElementById('newBranch').value || selectedBranch,
+                "status": "available"
+            };
+            
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    action: "ADD_STOCK", 
+                    password: ADMIN_PASSWORD, 
+                    data: newItem 
+                })
+            });
+            
+            inventory.push(newItem);
+            rawFullData.push(newItem);
+            updateUI();
+            closePassModal();
+        } else if (authAction === "sn") {
+            closePassModal();
+            if (activeSNContainer && activeRealSN) {
+                const container = document.getElementById(activeSNContainer);
+                const snText = container.querySelector('.sn-tag');
+                snText.innerText = `SN: ${activeRealSN}`;
+                if (hideTimers[activeSNContainer]) clearTimeout(hideTimers[activeSNContainer]);
+                hideTimers[activeSNContainer] = setTimeout(() => {
+                    if (container) snText.innerText = "SN: ***";
+                }, 10000);
+            }
+        } else if (authAction === "sold") {
+            closePassModal();
+            const cardEl = document.getElementById(activeSNContainer);
+            if (cardEl) cardEl.remove();
+            
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    action: "MARK_SOLD",
+                    password: ADMIN_PASSWORD,
+                    serialNumber: activeItemSerial,
+                    sku: activeItemSKU,
+                    branch: activeItemBranch
+                })
+            });
+            
+            inventory = inventory.filter(item => {
+                const sn = item["serial number"] || item["sn"] || item["serial"] || item["imei"] || "";
+                return String(sn).trim() !== String(activeItemSerial).trim();
+            });
+        }
+    } else {
+        document.getElementById('passError').innerText = "Incorrect password. Please try again.";
+        document.getElementById('passError').style.display = 'block';
+    }
+}
+
+function closePassModal() {
+    document.getElementById('passModal').classList.remove('show');
+}
+
+function openModal(img, cap) {
+    if(!img) return;
+    document.getElementById('modalImg').src = img;
+    document.getElementById('modalCap').innerText = cap;
+    document.getElementById('imageModal').classList.add('show');
+}
+
+function closeModal() {
+    document.getElementById('imageModal').classList.remove('show');
+}
+// Show video immediately on page load
+function showScreensaver() {
+    const overlay = document.getElementById("screensaverOverlay");
+    const video = document.getElementById("screensaverVideo");
+    if (overlay && video) {
+        overlay.style.display = "block";
+        video.currentTime = 0;
+        video.play().catch(err => console.log("Autoplay blocked:", err));
+    }
+}
+
+// Close video completely and show the main page
+function dismissScreensaver() {
+    const overlay = document.getElementById("screensaverOverlay");
+    const video = document.getElementById("screensaverVideo");
+    
+    if (overlay && overlay.style.display !== "none") {
+        overlay.style.display = "none";
+        if (video) video.pause();
+        
+        // Remove listeners so mouse movement won't trigger anything else
+        ['mousemove', 'mousedown', 'touchstart', 'scroll', 'keydown'].forEach(eventName => {
+            window.removeEventListener(eventName, dismissScreensaver, true);
+        });
+    }
+}
+
+// Run immediately as soon as the page opens
+document.addEventListener("DOMContentLoaded", () => {
+    showScreensaver();
+    
+    // Listen for the first touch/move/click to hide the video
+    ['mousemove', 'mousedown', 'touchstart', 'scroll', 'keydown'].forEach(eventName => {
+        window.addEventListener(eventName, dismissScreensaver, true);
+    });
+});
+</script>
+</body>
+</html>
+
+
